@@ -3,7 +3,7 @@
 REFRESH_TOKEN='__YOUR_REFRESH_TOKEN_HERE__'
 ###
 
-TOKEN=$(curl -s http://localhost:8080/token?refreshToken=${REFRESH_TOKEN} | jq -r '.access_token')
+TOKEN=$(curl -s https://spotifybash.mybluemix.net/token?refreshToken=${REFRESH_TOKEN} | jq -r '.access_token')
 TMPFILE=/tmp/spotify-`date +%s`.json
 ALBUM_IMAGE=/tmp/spotify-img-$(date +%s).jpg
 
@@ -16,7 +16,7 @@ then
 	exit 0
 fi
 
-curl -s $(jq -r '.item.album.images | .[] |  select(.height | contains(64)) | .url' ${TMPFILE}) -o ${ALBUM_IMAGE}
+curl -s $(jq -r '.item.album.images | min_by(.height) | .url' ${TMPFILE}) -o ${ALBUM_IMAGE}
 
 NP="Now Playing: `jq -r '.item.artists | map(.name) | join(", ")' ${TMPFILE}` - `jq -r '.item.name' ${TMPFILE}` • `jq -r '.item.album.name' ${TMPFILE}`"
 notify-send -i ${ALBUM_IMAGE} "${NP}"
