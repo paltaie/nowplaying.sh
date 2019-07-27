@@ -1,5 +1,5 @@
 #!/bin/bash -e
-# To get started, go to http://localhost:8080/login to authorise SpotifyBash to access your Now Playing data, and follow the prompts
+# To get started, go to https://spotifybash.mybluemix.net/login to authorise SpotifyBash to access your Now Playing data, and follow the prompts
 REFRESH_TOKEN='__YOUR_REFRESH_TOKEN_HERE__'
 ###
 
