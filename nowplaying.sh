@@ -21,16 +21,17 @@ ALBUM_IMAGE=/tmp/spotify-img-$(date +%s).jpg
 
 curl -sH "Authorization: Bearer ${TOKEN}" "https://api.spotify.com/v1/me/player/currently-playing" > "${TMPFILE}"
 
-if ! [ -s "${TMPFILE}" ] || [ "$(jq -r '.is_playing' ${TMPFILE})" == "false" ]
+if ! [ -s "${TMPFILE}" ] || [ "$(jq -r '.is_playing' "${TMPFILE}")" == "false" ]
 then
-	notify-send "No music currently playing"
-	rm ${TMPFILE}
-	exit 0
+        notify-send "No music currently playing"
+        rm "${TMPFILE}"
+        exit 0
 fi
 
-curl -s "$(jq -r '.item.album.images | min_by(.height) | .url' ${TMPFILE})" -o ${ALBUM_IMAGE}
-NP="Now Playing: `jq -r '.item.artists | map(.name) | join(", ")' ${TMPFILE}` - `jq -r '.item.name' ${TMPFILE}` • `jq -r '.item.album.name' ${TMPFILE}`"
-notify-send -i ${ALBUM_IMAGE} "${NP}"
+curl -s "$(jq -r '.item.album.images | min_by(.height) | .url' "${TMPFILE}")" -o "${ALBUM_IMAGE}"
+NP="Now Playing: $(jq -r '.item.artists | map(.name) | join(", ")' "${TMPFILE}") - $(jq -r '.item.name' "${TMPFILE}") • $(jq -r '.item.album.name' "${TMPFILE}")"
+notify-send -i "${ALBUM_IMAGE}" "${NP}"
 echo -n "${NP}" | xclip -selection c
 sleep 0.2
 rm "${TMPFILE}" "${ALBUM_IMAGE}"
+
