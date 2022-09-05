@@ -1,5 +1,5 @@
 #!/bin/bash -e
-# To get started, go to https://spotifybash.paltaie.com/spotifybash/login to authorise SpotifyBash to access your Now Playing data, and follow the prompts
+# To get started, go to https://spotifybash.paltaie.com/login to authorise SpotifyBash to access your Now Playing data, and follow the prompts
 REFRESH_TOKEN='__YOUR_REFRESH_TOKEN_HERE__'
 ###
 
@@ -15,7 +15,7 @@ if (( "${#CMD_FAILURES}" > 0 )); then
 fi
 
 #Declare some vars
-TOKEN=$(curl -s https://spotifybash.paltaie.com/spotifybash/token?refreshToken=${REFRESH_TOKEN} | jq -r '.access_token')
+TOKEN=$(curl -s https://spotifybash.paltaie.com/token?refreshToken=${REFRESH_TOKEN} | jq -r '.access_token')
 TMPFILE=/tmp/spotify-$(date +%s).json
 ALBUM_IMAGE=/tmp/spotify-img-$(date +%s).jpg
 
