@@ -12,7 +12,7 @@ your to your friends
 ## Setup
 0. Make sure `jq` is on your `$PATH`: https://stedolan.github.io/jq/
 1. Clone this repo (or just get `nowplaying.sh` by itself)
-2. Go to https://spotifybash.mybluemix.net/login - this will take you to Spotify so that you can authorise `nowplaying.sh` (app name: SpotifyBash) to access your "now playing" data from Spotify.
+2. Go to https://spotifybash.paltaie.com/login - this will take you to Spotify so that you can authorise `nowplaying.sh` (app name: SpotifyBash) to access your "now playing" data from Spotify.
 3. Just follow the prompts!
 
 ## Adding nowplaying.sh as a keyboard shortcut
